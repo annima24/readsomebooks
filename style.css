@@ -1,0 +1,26 @@
+p{
+    display: grid;
+    border: 1px solid black;
+    padding: 5px;
+    gap: 5px;
+    margin: 0px;
+}
+.read   {
+    width: 60px;
+    text-align: center;
+    justify-self: end;
+}
+
+.remove   {
+    width: 80px;
+    text-align: center;
+    justify-self: end;
+}
+
+#output {
+    
+    display: grid;
+    padding-top: 10px;
+    grid-template-columns: repeat(auto-fill, 200px);
+    gap: 5px;
+}

@@ -8,19 +8,22 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <form>
-        <label for="title">Title:</label><br>
-        <input type="text" id="title" name="titleinput"><br>
-        <label for="author">Author:</label><br>
-        <input type="text" id="author" name="author"><br>
-        <label for="pages">Pages:</label><br>
-        <input type="text" id="pages" name="pages"><br>
-        <label for="radio">Have you read the book?</label><br>
-        <input type="radio" name="radio" id="yesbtn" value="Yes" > Yes</input>
-        <input type="radio" name="radio" id="nobtn" value="No"> No</input><br>
-        <br>
-        <button type="button" id="submitBtn">Submit</button>
-      </form> 
+    <button type="button" id="addBook">Add New Book</button>
+    <div id="entryForm">
+        <form>
+            <label for="title">Title:</label><br>
+            <input type="text" id="title" name="titleinput"><br>
+            <label for="author">Author:</label><br>
+            <input type="text" id="author" name="author"><br>
+            <label for="pages">Pages:</label><br>
+            <input type="text" id="pages" name="pages"><br>
+            <label for="radio">Have you read the book?</label><br>
+            <input type="radio" name="radio" id="yesbtn" value="Yes" > Yes</input>
+            <input type="radio" name="radio" id="nobtn" value="No"> No</input><br>
+            <br>
+            <button type="button" id="submitBtn">Submit</button>
+          </form> 
+    </div>
     <div id="output"></div>
     <script src="script.js"></script>
 </body>
