@@ -8,6 +8,7 @@ const entryForm = document.querySelector('#entryForm');
 const addBookBtn = document.querySelector('#addBook');
 let myLibrary = [];
 let checked = 'true';
+let booksInStorage;
 
 function Book(title, author, pages, hasRead) {
     this.title = title
@@ -17,6 +18,11 @@ function Book(title, author, pages, hasRead) {
 }
 
 function addBookToLibrary(book) {
+    console.log(book);
+    localStorage.setItem(`${localStorage.length + 1}`, book.title);
+    localStorage.setItem(`${localStorage.length + 1}`, book.author);
+    localStorage.setItem(`${localStorage.length + 1}`, book.pages);
+    localStorage.setItem(`${localStorage.length + 1}`, book.hasRead);
     myLibrary.push(book);
 }
 
@@ -97,17 +103,50 @@ function createNewObject()   {
     clearFields();
     
 }
+function numOfBooks()   {
+    booksInStorage = localStorage.length/4;
+}
+
+function populateArray()    {
+    for (i = 0; i < booksInStorage; i++)    {
+        //this variable represents the actual key number in localStorage, calculated by multiplying i by 4, because books in storage just is the length of local storage divided by 4
+        let x = (4*i)+1
+        let title = localStorage.getItem(x);
+        let author = localStorage.getItem(x + 1);
+        let pages = localStorage.getItem(x + 2);
+        let hasRead = localStorage.getItem(x + 3)
+        console.log(title, author, pages, hasRead, i, x );
+        const newBook = new Book(title, author, pages, hasRead)
+        myLibrary.push(newBook);
+    // console.log(localStorage.getItem(i));
+    }
+}
 
 submitBtn.addEventListener('click' , checkFields);
 addBookBtn.addEventListener('click', displayForm)
 
 const bookOne = new Book('The Hobbit', 'Tolken', 298, 'Yes');
 const bookTwo = new Book('Dune', 'Herbert', 1298, 'No');
-addBookToLibrary(bookOne);
-addBookToLibrary(bookTwo);
+
+// localStorage.clear()
+// addBookToLibrary(bookOne);
+// addBookToLibrary(bookTwo);
+numOfBooks();
+populateArray();
 displayBooks();
-// const removeBtns = document.querySelectorAll('.remove').forEach(btn => btn.addEventListener('click', function() {
-//     myLibrary.splice(btn.dataset.remove, 1), displayBooks();
-// }))
 
 
+
+// function storeData()    {
+//     myLibrary.forEach( function(book, i) {
+//     localStorage.setItem(, book.title),
+//     localStorage.setItem(, book.author),
+//     localStorage.setItem(, book.pages);
+//     }
+//     )}
+// localStorage.clear();
+// storeData();
+// console.log(localStorage);
+
+// there are 4 items so the length of local storage / 4 = number of books
+// bust out the old for loop and loop over local storage as many times as there are books, adding 4 items at a time to the array
