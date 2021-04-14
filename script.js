@@ -18,20 +18,32 @@ function Book(title, author, pages, hasRead) {
 }
 
 function addBookToLibrary(book) {
-    console.log(book);
+    addBookToStorage(book);
+    myLibrary.push(book);
+}
+
+function addBookToStorage(book) {    
     localStorage.setItem(`${localStorage.length + 1}`, book.title);
     localStorage.setItem(`${localStorage.length + 1}`, book.author);
     localStorage.setItem(`${localStorage.length + 1}`, book.pages);
     localStorage.setItem(`${localStorage.length + 1}`, book.hasRead);
-    myLibrary.push(book);
+    
+}
+
+function removeFromStorage()    {
+    localStorage.clear();
+    myLibrary.forEach(book => addBookToStorage(book));
 }
 
 function fillEmptyFieldAlert()  {
     alert('please fill in empty fields');
 }
-function deleteBook(removeBtn)   {
+
+function deleteBook(e)   {
     myLibrary.splice(removeBtn.dataset.remove, 1), displayBooks()
 }
+
+
 function displayForm()  {
     if (entryForm.style.display === '') {
         entryForm.style.display = 'none'
@@ -39,18 +51,22 @@ function displayForm()  {
         entryForm.style.display = ''
     } 
 }
+
 //the function that handles the creation of the cards on click after a check to make sure fields are properly filled out.
+
 function createBookCard(book, i) {
     //creating the elements of the card
     const para = document.createElement('p');
     const readBtn = document.createElement('button');
     const removeBtn = document.createElement('button');
+    
     //setting attributs and text
     para.setAttribute('data-set', i)
     para.innerText = `Title: ${book.title}  
     Author: ${book.author} 
     Pages: ${book.pages}        
     Completed: ${book.hasRead}`;
+    
     //setting attributes and putting event listeners on the btns. this controls the state of the hasread part of the object
     readBtn.setAttribute('class', 'read')
     readBtn.textContent = 'read';
@@ -60,19 +76,22 @@ function createBookCard(book, i) {
             myLibrary[readBtn.dataset.read].hasRead = 'No', displayBooks();
         } else if (myLibrary[readBtn.dataset.read].hasRead === 'No')  {
             myLibrary[readBtn.dataset.read].hasRead = 'Yes', displayBooks();
-    }})
-    //setting attributes and putting event listeners on the btns. this removes the object from the array if the btn is clicked and then returns the new array
+        }})
+        
+        //setting attributes and putting event listeners on the btns. this removes the object from the array if the btn is clicked and then returns the new array
     removeBtn.textContent = 'remove';
     removeBtn.setAttribute('class', 'remove')
     removeBtn.setAttribute('data-remove', i)
-    removeBtn.addEventListener('click', function()  {
-        myLibrary.splice(removeBtn.dataset.remove, 1), displayBooks()
+    removeBtn.addEventListener('click', function()  {       
+        myLibrary.splice(removeBtn.dataset.remove, 1), removeFromStorage(), displayBooks();
     });
+    
     //adding the cards to the display
     output.appendChild(para);
     para.appendChild(readBtn)
     para.appendChild(removeBtn)    
 }
+
 
 //loops through the array that holds all the books and creates display cards for each.
 function displayBooks() {
@@ -86,13 +105,14 @@ function checkFields()  {
     } else if (isNaN(parseInt(pagesInput.value)) === true)    {
         alert('numbers only please');
     } else createNewObject();
- }
- 
+}
+
 function clearFields()  {
     titleInput.value = '';
     authorInput.value = '';
     pagesInput.value = '';
 }
+
 //when the submit button is clicked, this takes all the values and puts them into an object, it then pushes that object to the myLibrary array, then updates the view field with the new book being displayed and clears out the form.
 function createNewObject()   {
     let read;
@@ -103,6 +123,7 @@ function createNewObject()   {
     clearFields();
     
 }
+
 function numOfBooks()   {
     booksInStorage = localStorage.length/4;
 }
@@ -118,7 +139,8 @@ function populateArray()    {
         console.log(title, author, pages, hasRead, i, x );
         const newBook = new Book(title, author, pages, hasRead)
         myLibrary.push(newBook);
-    // console.log(localStorage.getItem(i));
+        displayBooks();
+        // console.log(localStorage.getItem(i));
     }
 }
 
@@ -133,20 +155,7 @@ const bookTwo = new Book('Dune', 'Herbert', 1298, 'No');
 // addBookToLibrary(bookTwo);
 numOfBooks();
 populateArray();
-displayBooks();
 
 
 
-// function storeData()    {
-//     myLibrary.forEach( function(book, i) {
-//     localStorage.setItem(, book.title),
-//     localStorage.setItem(, book.author),
-//     localStorage.setItem(, book.pages);
-//     }
-//     )}
-// localStorage.clear();
-// storeData();
-// console.log(localStorage);
 
-// there are 4 items so the length of local storage / 4 = number of books
-// bust out the old for loop and loop over local storage as many times as there are books, adding 4 items at a time to the array
