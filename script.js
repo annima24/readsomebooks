@@ -76,7 +76,7 @@ function createBookCard(book, i) {
             myLibrary[readBtn.dataset.read].hasRead = 'No', displayBooks();
         } else if (myLibrary[readBtn.dataset.read].hasRead === 'No')  {
             myLibrary[readBtn.dataset.read].hasRead = 'Yes', displayBooks();
-        }})
+        }}, removeFromStorage())
         
         //setting attributes and putting event listeners on the btns. this removes the object from the array if the btn is clicked and then returns the new array
     removeBtn.textContent = 'remove';
