@@ -2,7 +2,6 @@ const output = document.querySelector('#output');
 const titleInput = document.querySelector('#title');
 const authorInput = document.querySelector('#author');
 const pagesInput = document.querySelector('#pages');
-const radioInput = document.querySelectorAll('[name="radio"]');
 const submitBtn = document.querySelector('#submitBtn');
 const entryForm = document.querySelector('#entryForm');
 const addBookBtn = document.querySelector('#addBook');
@@ -73,10 +72,10 @@ function createBookCard(book, i) {
     readBtn.setAttribute('data-read', i)
     readBtn.addEventListener('click', function()    {
         if (myLibrary[readBtn.dataset.read].hasRead === 'Yes')  {
-            myLibrary[readBtn.dataset.read].hasRead = 'No', displayBooks();
+            myLibrary[readBtn.dataset.read].hasRead = 'No', removeFromStorage() ,displayBooks();
         } else if (myLibrary[readBtn.dataset.read].hasRead === 'No')  {
-            myLibrary[readBtn.dataset.read].hasRead = 'Yes', displayBooks();
-        }}, removeFromStorage())
+            myLibrary[readBtn.dataset.read].hasRead = 'Yes', removeFromStorage(), displayBooks();
+        }})
         
         //setting attributes and putting event listeners on the btns. this removes the object from the array if the btn is clicked and then returns the new array
     removeBtn.textContent = 'remove';
@@ -115,9 +114,8 @@ function clearFields()  {
 
 //when the submit button is clicked, this takes all the values and puts them into an object, it then pushes that object to the myLibrary array, then updates the view field with the new book being displayed and clears out the form.
 function createNewObject()   {
-    let read;
-    radioInput.forEach(btn => read = btn.value);
-    const newBook = new Book(titleInput.value,authorInput.value,pagesInput.value, read);
+    
+    const newBook = new Book(titleInput.value,authorInput.value,pagesInput.value, 'Yes');
     addBookToLibrary(newBook);
     displayBooks();
     clearFields();
