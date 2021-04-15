@@ -147,7 +147,7 @@ function populateArray()    {
 }
 
 submitBtn.addEventListener('click' , checkFields);
-addBookBtn.addEventListener('click', displayForm)
+
 
 numOfBooks();
 populateArray();
