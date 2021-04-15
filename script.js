@@ -35,7 +35,7 @@ function removeFromStorage()    {
 }
 
 function fillEmptyFieldAlert()  {
-    alert('please fill in empty fields');
+    alert('Please fill in empty fields.');
 }
 
 function deleteBook(e)   {
@@ -61,6 +61,7 @@ function createBookCard(book, i) {
     
     //setting attributs and text
     para.setAttribute('data-set', i)
+    para.setAttribute('class', 'card')
     para.innerText = `Title: ${book.title}  
     Author: ${book.author} 
     Pages: ${book.pages}        
@@ -68,7 +69,7 @@ function createBookCard(book, i) {
     
     //setting attributes and putting event listeners on the btns. this controls the state of the hasread part of the object
     readBtn.setAttribute('class', 'read')
-    readBtn.textContent = 'read';
+    readBtn.textContent = 'Change status';
     readBtn.setAttribute('data-read', i)
     readBtn.addEventListener('click', function()    {
         if (myLibrary[readBtn.dataset.read].hasRead === 'Yes')  {
@@ -78,7 +79,7 @@ function createBookCard(book, i) {
         }})
         
         //setting attributes and putting event listeners on the btns. this removes the object from the array if the btn is clicked and then returns the new array
-    removeBtn.textContent = 'remove';
+    removeBtn.textContent = 'Remove book';
     removeBtn.setAttribute('class', 'remove')
     removeBtn.setAttribute('data-remove', i)
     removeBtn.addEventListener('click', function()  {       
@@ -101,8 +102,12 @@ function displayBooks() {
 function checkFields()  {
     if (titleInput.value === '' || authorInput.value === '')    {
         fillEmptyFieldAlert();
-    } else if (isNaN(parseInt(pagesInput.value)) === true)    {
-        alert('numbers only please');
+    } else if (titleInput.value.length > 55)  {
+        alert('Title is too long.')
+    }   else if (authorInput.value.length > 25)  {
+        alert('Authors name is too long.')
+    }else if (isNaN(parseInt(pagesInput.value)) === true)    {
+        alert('Numbers only, please.');
     } else createNewObject();
 }
 
@@ -134,7 +139,6 @@ function populateArray()    {
         let author = localStorage.getItem(x + 1);
         let pages = localStorage.getItem(x + 2);
         let hasRead = localStorage.getItem(x + 3)
-        console.log(title, author, pages, hasRead, i, x );
         const newBook = new Book(title, author, pages, hasRead)
         myLibrary.push(newBook);
         displayBooks();
@@ -145,14 +149,9 @@ function populateArray()    {
 submitBtn.addEventListener('click' , checkFields);
 addBookBtn.addEventListener('click', displayForm)
 
-const bookOne = new Book('The Hobbit', 'Tolken', 298, 'Yes');
-const bookTwo = new Book('Dune', 'Herbert', 1298, 'No');
-
-// localStorage.clear()
-// addBookToLibrary(bookOne);
-// addBookToLibrary(bookTwo);
 numOfBooks();
 populateArray();
+console.log('hi friend')
 
 
 

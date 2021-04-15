@@ -8,21 +8,31 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <button type="button" id="addBook">Add New Book</button>
-    <div id="entryForm">
-        <form>
-            <label for="title">Title:</label><br>
-            <input type="text" id="title" name="titleinput"><br>
-            <label for="author">Author:</label><br>
-            <input type="text" id="author" name="author"><br>
-            <label for="pages">Pages:</label><br>
-            <input type="text" id="pages" name="pages"><br>
+    <div id="wrapper">
 
-            <br>
-            <button type="button" id="submitBtn">Submit</button>
-          </form> 
+        <div class="title">
+            <h1>Welcome to the Library</h1>
+        </div>
+        <div id="form">
+            <div id="entryForm">
+                <form>
+                    <h2>An easy way to keep track of books you've read or would like to read.</h2>
+                    <label for="title">Title:</label><br>
+                    <input type="text" id="title" name="titleinput"><br>
+                    <label for="author">Author:</label><br>
+                    <input type="text" id="author" name="author"><br>
+                    <label for="pages">Pages:</label><br>
+                    <input type="text" id="pages" name="pages"><br>
+                    
+                    <br>
+                    <button type="button" id="submitBtn">Submit</button>
+                </form> 
+            </div>
+        </div>
+        <div>
+        </div>
+        <div id="output"></div>
     </div>
-    <div id="output"></div>
     <script src="script.js"></script>
 </body>
 </html>
