@@ -152,7 +152,3 @@ submitBtn.addEventListener('click' , checkFields);
 numOfBooks();
 populateArray();
 console.log('hi friend')
-
-
-
-
